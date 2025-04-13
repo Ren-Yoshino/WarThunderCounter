@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>War Thunder - Counter</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='bootstrap-4.0.0-dist/css/bootstrap.css'>
+</head>
+
+<body>
+    <h1>War Thunder - Counter</h1>
+    <div class="container">
+        <section>
+            <p>味方プレイヤーの名前を入力してください：</p>
+            <input type="text" id="playerName" name="playerName" maxlength="50" size="30px" placeholder="５０文字まで">
+            <br />
+            <br />
+            <button onclick="addPlayerName()">保存</button>
+        </section>
+        <section>
+            <p>相手クランの名前を入力してください：</p>
+            <input type="text" id="clanName" name="clanName" maxlength="30" placeholder="30文字まで" size="30px">
+            <br />
+            <label for="statusWin"><input type="checkbox" id="statusWin" name="statusWin" checked>この戦闘には勝利しましたか？
+                Yes-チェック : No
+                - チェックなし
+            </label>
+            <br />
+            <button onclick="addEnemyClan()">保存</button>
+        </section>
+        <section>
+            <p>観戦したプレイヤーの名前を入力してください：</p>
+            <input type="text" id="playerNameView" name="playerNameView" maxlength="50" size="30px" placeholder="５０文字まで">
+            <br />
+            <br />
+            <button onclick="addPlayerView()">保存</button>
+        </section>
+        <!-- grid-column を使って全列にまたがる -->
+        <section class="full-width">
+            <table id="resultTable">
+                <tr>
+                    <th>Result</th>
+                </tr>
+                <tr id="playerColun">
+
+                </tr>
+                <tr id="clanRow">
+
+                </tr>
+            </table>
+        </section>
+        <section class="full-width">
+            <table id="resultTable">
+                <tr id="playerView">
+                    <th>観戦プレイヤー</th>
+                </tr>
+                <tr id="playerViewName">
+
+                </tr>
+            </table>
+        </section>
+    </div>
+</body>
+<script src='main.js'></script>
+</html>

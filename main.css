@@ -1,0 +1,15 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 等分の列 */
+    grid-gap: 10px;                        /* グリッド間の余白 */
+  }
+  section {
+    background-color: #ccc;
+    padding: 20px;
+    text-align: center;
+  }
+  /* 下部のセクションは全列に跨る */
+  section.full-width {
+    grid-column: 1 / -1;
+    background-color: #aaa;
+  }
