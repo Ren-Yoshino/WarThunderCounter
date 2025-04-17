@@ -22,7 +22,7 @@ function addPlayerName() {
 function addEnemyClan() {
     let clanName = document.getElementById("clanName").value;
     let flag = document.getElementById("statusWin").value;
-    if(clanName = ""){
+    if(clanName == ""){
         alert("クラン名を入力してください!");
     }
     else{
@@ -30,6 +30,7 @@ function addEnemyClan() {
         victoryStatus[enemyClanCount] = flag == "on" ? "Win" : "Lose";
         enemyClanCount++;
         document.querySelector('#clanName').value = '';
+        addItemPlayerView("clanColun", 0);
     }
 }
 
@@ -42,9 +43,21 @@ function addPlayerView() {
         playerViews[playerViewCount] = playerView;
         playerViewCount++;
         document.querySelector('#playerNameView').value = '';
+        addItemPlayerView("playerViewName", 1);
     }
 }
 
-function calcKillCount() {
+function addItemRow(){
 
+}
+
+function addItemPlayerView(elementID, op){
+    let rowTable = document.getElementById(elementID);
+    let newCell = rowTable.insertCell();
+    if(op == 0){
+        newCell.innerHTML = "<span name='clanSpan'>"+enemyClan[enemyClanCount-1]+"<span>";
+    }
+    else{
+        newCell.innerHTML = "<span name='playerViewSpan'>"+playerViews[playerViewCount-1]+"<span>";
+    }
 }
