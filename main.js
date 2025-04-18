@@ -31,7 +31,7 @@ function addEnemyClan() {
         alert("クラン名を入力してください!");
     }
     else {
-        enemyClan[enemyClanCount] = clanName;
+        enemyClan[enemyClanCount] = clanName.toUpperCase();;
         victoryStatus[enemyClanCount] = flag.checked ? "Win" : "Lose";
         enemyClanCount++;
         document.querySelector('#clanName').value = '';
@@ -89,7 +89,7 @@ function addNumberFieldRow() {
     for (j = 0; j < enemyClanCount; j++) {
         //let newCol = document.createElement("td");
         table.rows[i].insertCell(-1);
-        table.rows[i].cells[j + 1].innerHTML = "<input type='number' name='playerScore' class='scoreInput' id='playerScore" + i + "_" + (j + 1) + "' value='0' min='0' max='25' step='1' oninput='this.value = Math.max(0, Math.min(25, this.value))'>";
+        table.rows[i].cells[j + 1].innerHTML = "<input type='number' name='playerScore' class='scoreInput' id='playerScore" + i + "_" + (j) + "' value='0' min='0' max='25' step='1' oninput='this.value = Math.max(0, Math.min(25, this.value))' onblur='calcTotalKills(" + i + ")'>";
     }
     /*table.rows[i].insertCell(-1);
     table.rows[i].cells[j+2].innerHTML = "<input type='number' name='playerScore' class='scoreInput' id='playerTotalKill"+i+"' value='0' min='0' max='25' step='1' oninput='this.value = Math.max(0, Math.min(25, this.value))'>";
@@ -103,7 +103,7 @@ function addNumberFieldCol() {
     for (let i = 1; i < table.rows.length - 1; i++) {
         //let newCol = document.createElement("td");
         table.rows[i].insertCell(j+1);
-        table.rows[i].cells[j + 1].innerHTML = "<input type='number' name='playerScore' class='scoreInput' id='playerScore" + i + "_" + (j) + "' value='0' min='0' max='25' step='1' oninput='this.value = Math.max(0, Math.min(25, this.value))'>";
+        table.rows[i].cells[j + 1].innerHTML = "<input type='number' name='playerScore' class='scoreInput' id='playerScore" + i + "_" + (j) + "' value='0' min='0' max='25' step='1' oninput='this.value = Math.max(0, Math.min(25, this.value))' onblur='calcTotalKills(" + i + ")'>";
     }
     updateColSpan();
 }
@@ -113,13 +113,31 @@ function addTotalKillField() {
     let i = table.rows.length - 2;
     let j = enemyClanCount;
     table.rows[i].insertCell(-1);
-    table.rows[i].cells[j + 2].innerHTML = "<input type='number' name='playerScore' class='scoreInput' id='playerTotalKill" + i + "' value='0' min='0' max='25' step='1' oninput='this.value = Math.max(0, Math.min(25, this.value))'>";
+    table.rows[i].cells[j + 2].innerHTML = "<input type='number' name='playerScore' class='scoreInput' id='playerTotalKill" + i + "' value='0' min='0' readonly>";
 
     updateColSpan();
 }
 
+//-----------------------------------------------------------------------------------------
 
 //---------------------------------- Atualization ColSpan----------------------------------
 function updateColSpan() {
     document.getElementById("killCountTable").colSpan = enemyClanCount + 1;
 }
+
+//-----------------------------------------------------------------------------------------
+
+//------------------------------- Calculate Total Kill -----------------------------------
+function calcTotalKills(rowPosition) {
+    let table = document.getElementById("resultTable");
+    let totalKill = 0;
+    let j=0;
+    for (let i = 1; i < enemyClanCount + 1; i++, j++) {
+        let score = document.getElementById("playerScore" + rowPosition + "_" + j).value;
+        totalKill += parseInt(score);
+    }
+    document.getElementById("playerTotalKill" + rowPosition).value = totalKill;
+
+}
+
+//----------------------------------------------------------------------------------------
