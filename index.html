@@ -11,18 +11,18 @@
 </head>
 
 <body>
-    <h1>War Thunder - Counter Ver.1.0</h1>
+    <h1>War Thunder - Counter Ver.1.1</h1>
     <div class="container">
         <section>
             <p>味方プレイヤーの名前を入力してください：</p>
-            <input type="text" id="playerName" name="playerName" maxlength="50" size="30px" placeholder="５０文字まで">
+            <input type="text" id="playerName" name="playerName" maxlength="50" size="30px" placeholder="５０文字まで" onkeypress="enterEventOP(1)">
             <br />
             <br />
             <button onclick="addPlayerName()">保存</button>
         </section>
         <section>
             <p>相手クランの名前を入力してください：</p>
-            <input type="text" id="clanName" name="clanName" maxlength="30" placeholder="30文字まで" size="30px">
+            <input type="text" id="clanName" name="clanName" maxlength="30" placeholder="30文字まで" size="30px" onkeypress="enterEventOP(2)">
             <br />
             <label for="statusWin"><input type="checkbox" id="statusWin" name="statusWin" checked>この戦闘には勝利しましたか？
                 Yes-チェック : No
@@ -33,7 +33,7 @@
         </section>
         <section>
             <p>観戦したプレイヤーの名前を入力してください：</p>
-            <input type="text" id="playerNameView" name="playerNameView" maxlength="50" size="30px" placeholder="５０文字まで">
+            <input type="text" id="playerNameView" name="playerNameView" maxlength="50" size="30px" placeholder="５０文字まで" onkeypress="enterEventOP(3)">
             <br />
             <br />
             <button onclick="addPlayerView()">保存</button>

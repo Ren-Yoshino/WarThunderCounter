@@ -31,7 +31,7 @@ function addEnemyClan() {
         alert("クラン名を入力してください!");
     }
     else {
-        enemyClan[enemyClanCount] = clanName.toUpperCase();;
+        enemyClan[enemyClanCount] = clanName;
         victoryStatus[enemyClanCount] = flag.checked ? "Win" : "Lose";
         enemyClanCount++;
         document.querySelector('#clanName').value = '';
@@ -73,7 +73,7 @@ function addItemPlayerView(elementID, op, flag) {
     let newCell = rowTable.insertCell();
     if (op == 0) {
         let temp = flag.checked ? "style='color: green'" : "style='color: red'";
-        newCell.innerHTML = "<span name='clanSpan' " + temp + ">" + enemyClan[enemyClanCount - 1] + "<span>";
+        newCell.innerHTML = "<span name='clanSpan' " + temp + " id='clanSpan"+(enemyClanCount-1)+"' onclick=ChangeStatusWin("+(enemyClanCount-1)+")>" + enemyClan[enemyClanCount - 1] + "<span>";
     }
     else {
         newCell.innerHTML = "<span name='playerViewSpan'>" + playerViews[playerViewCount - 1] + "<span>";
@@ -164,15 +164,15 @@ function endResult() {
 
 function orderResult() { //playerTotalKill1
     let playerTotalKill = [];
-    let localPlayers = players;
+    let localPlayers = players.slice(); // Create a copy of the players array
     let result = "順位：<br/>";
     let position = 1;
     let killValue = 0;
     for (let i = 0; i < playerCount; i++) { // get Totatal Kill
-        playerTotalKill[i] = document.getElementById("playerTotalKill" + (i + 1)).value;
+        playerTotalKill[i] = (document.getElementById("playerTotalKill" + (i + 1)).value * 1);
     }
     //-------------------------- Ordentae Result - using Buble Sort --------------------------
-    for (let outer = 0; outer < playerTotalKill.length - 1; outer++) {
+    for (let outer = 0; outer < playerTotalKill.length-1; outer++) {
         for (let i = playerTotalKill.length - 1; i > outer; i--) {
             if (playerTotalKill[i] > playerTotalKill[i - 1]) {
                 let tmp = playerTotalKill[i]; //using for playerTotalKill
@@ -204,15 +204,21 @@ function orderResult() { //playerTotalKill1
 
 function orderResults(){
     let result = "<span style='font-weight: bold;'> 観戦プレイヤー:</sapn><br/>";
-    for(let i = 0; i < playerViewCount; i++){
-        if(i+1 < playerViewCount){
-            result += playerViews[i] + ",";
-        }
-        else{
-            result += playerViews[i] + ";<br/>";
+    if(playerViewCount == 0){
+        result += "<span>観戦プレイヤーがいません！</span><br/>";
+    }
+    else{
+        for(let i = 0; i < playerViewCount; i++){
+            if(i+1 < playerViewCount){
+                result += playerViews[i] + ",";
+            }
+            else{
+                result += playerViews[i] + ";<br/>";
+            }
         }
     }
     result += "<span style='font-weight: bold;'> 戦闘結果:</span><br/>" + (checkVictoryStatus());
+    return result;
 }
 
 function checkVictoryStatus(){
@@ -225,5 +231,36 @@ function checkVictoryStatus(){
             defeatCount++;
         }
     }   
-    return (victoryCount + defeatCount) + "戦中： <span style='color: green>" +victoryCount + "勝</span> <span style='color: red> " + defeatCount + " 敗</sapn> <br/>"; ;
+    return (victoryCount + defeatCount) + "戦中： <span style='color: green'>" +victoryCount + "勝</span> <span style='color: red'> " + defeatCount + " 敗</sapn> <br/>";
+}
+//----------------------------------------Change status win-------------------------------------------------
+function ChangeStatusWin(p) { //let victoryStatus = [];
+    let flag = document.getElementById("clanSpan"+p);
+    if(victoryStatus[p] == "Win"){
+        victoryStatus[p] = "Lose";
+        flag.style.color = "red";
+    }
+    else{
+        victoryStatus[p] = "Win";
+        flag.style.color = "green";
+    }   
+}
+//---------------------------------------------------------------------------------------------------
+
+function enterEventOP(op){
+    if(event.keyCode == 13){
+        switch(op){
+            case 1:
+                addPlayerName();
+                break;
+            case 2:
+                addEnemyClan();
+                break;
+            case 3:
+                addPlayerView();
+                break;
+            default:
+                break;
+        }
+    }
 }
