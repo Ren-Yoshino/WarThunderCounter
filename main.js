@@ -160,6 +160,7 @@ function endResult() {
     const result2 = orderResult(); // Call orderResult function to get the ranking
     document.getElementById("Result2").innerHTML = result2; // Insert result in Result2;
     document.getElementById("Result3").innerHTML = orderResults(); // Insert result in Result3;
+    document.getElementById("Result4").innerHTML = IconStatusBattle(); // Insert result in Result3;
 }
 
 function orderResult() { //playerTotalKill1
@@ -233,6 +234,20 @@ function checkVictoryStatus(){
     }   
     return (victoryCount + defeatCount) + "戦中： <span style='color: green'>" +victoryCount + "勝</span> <span style='color: red'> " + defeatCount + " 敗</sapn> <br/>";
 }
+
+function IconStatusBattle(){
+    let result = "<span style='font-weight: bold;'> 戦闘結果:</span><br/>";
+    for(let i = 0; i < victoryStatus.length; i++){
+        if(victoryStatus[i] == "Win"){
+            result += "<p>" + enemyClan[i] + " ◎<p/>";
+        }
+        else{
+            result += "<p>" + enemyClan[i] + " ×<p/>";;
+        }
+    }
+    return result;
+}
+
 //----------------------------------------Change status win-------------------------------------------------
 function ChangeStatusWin(p) { //let victoryStatus = [];
     let flag = document.getElementById("clanSpan"+p);

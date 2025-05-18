@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <h1>War Thunder - Counter Ver.1.1</h1>
+    <h1>War Thunder - Counter Ver.1.2</h1>
     <div class="container">
         <section>
             <p>味方プレイヤーの名前を入力してください：</p>
@@ -39,6 +39,7 @@
             <button onclick="addPlayerView()">保存</button>
         </section>
         <!-- grid-column を使って全列にまたがる -->
+    </div>
         <section class="full-width">
             <table id="resultTable">
                 <tr>
@@ -55,7 +56,7 @@
             </table>
         </section>
         <section class="full-width">
-            <table id="resultTable">
+            <table id="resultView">
                 <tr id="playerView">
                     <th>観戦プレイヤー</th>
                 </tr>
@@ -69,8 +70,9 @@
             <p id="Result1"></p>
             <p id="Result2"></p>
             <p id="Result3"></p>
+            <p id="Result4"></p>
         </section>
-    </div>
+    
 </body>
 <script src='main.js'></script>
 </html>
